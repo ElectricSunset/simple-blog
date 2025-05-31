@@ -1,45 +1,57 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import 'tailwindcss';
 
 @theme {
   /* Text Sizes and Line Heights */
   --text-display-3xl: 3.75rem;
-  --text-display-3xl--line-height: 4.5rem;
+  --text-display-2xl--line-height: 4.5rem;
+  --text-display-3xl--leter-spacing: -3%;
 
   --text-display-2xl: 3rem;
   --text-display-2xl--line-height: 3.75rem;
-  --text-display-2xl--letter-spacing: -2%;
+  --text-display-2xl--letter-spacing: -3%;
 
   --text-display-xl: 2.5rem;
   --text-display-xl--line-height: 3rem;
-  --text-display-xl--letter-spacing: -2%;
+  --text-display-xl--letter-spacing: -3%;
 
   --text-display-lg: 2.25rem;
   --text-display-lg--line-height: 2.75rem;
-  --text-display-lg--letter-spacing: -2%;
+  --text-display-lg--letter-spacing: -3%;
 
   --text-display-md: 2rem;
   --text-display-md--line-height: 2.5rem;
+  --text-display-md--letter-spacing: -3%;
 
   --text-display-sm: 1.75rem;
   --text-display-sm--line-height: 2.375rem;
+  --text-display-sm--letter-spacing: -3%;
 
   --text-display-xs: 1.5rem;
   --text-display-xs--line-height: 2.25rem;
+  --text-display-xs--letter-spacing: -3%;
 
   --text-xl: 1.25rem;
   --text-xl--line-height: 2.125rem;
+  --text-xl--letter-spacing: -3%;
 
   --text-lg: 1.125rem;
   --text-lg--line-height: 2rem;
+  --text-lg--letter-spacing: -3%;
 
   --text-md: 1rem;
   --text-md--line-height: 1.875rem;
+  --text-md--letter-spacing: -3%;
 
   --text-sm: 0.875rem;
-  --text-sm--line-height: 1.5rem;
+  --text-sm--line-height: 1.75rem;
+  --text-sm--letter-spacing: -3%;
 
   --text-xs: 0.75rem;
-  --text-xs--line-height: 1rem;
+  --text-xs--line-height: 1.5rem;
+  --text-xs--letter-spacing: -3%;
 
   /* Font Weights */
   --font-weight-regular: 400;
@@ -49,24 +61,22 @@
   --font-weight-extrabold: 800;
 
   /* Color Theme */
-  --color-neutral-100: #fff;
-  --color-neutral-200: #b5b5b5;
-  --color-neutral-300: #545357;
-  --color-neutral-400: #242424;
-  --color-neutral-500: #0f0f0f;
-  --color-neutral-600: #020203;
+  --color-neutral-25: #fdfdfd;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e9eaeb;
+  --color-neutral-300: #d5d7da;
+  --color-neutral-400: #a4a7ae;
+  --color-neutral-500: #717680;
+  --color-neutral-600: #535862;
+  --color-neutral-700: #414651;
+  --color-neutral-800: #252b37;
+  --color-neutral-900: #181d27;
 
-  --color-primary-100: #d3bbfa;
-  --color-primary-200: #8144df;
-  --color-primary-300: #632abb;
-  --color-primary-400: #a447d2;
-  --color-primary-500: #8746eb;
-
-  --color-secondary-100: rgba(220, 73, 166, 0.4);
-  --color-secondary-200: #dc49a6;
-  --color-secondary-300: #b83387;
-  --color-secondary-400: #c048bc;
-  --color-secondary-500: #dc49a6;
+  --color-primary-100: #e5f4fb;
+  --color-primary-200: #6fcfff;
+  --color-primary-300: #0093dd;
+  --color-primary-400: #050a1b;
 
   /* Radius */
   --radius-none: 0rem;
@@ -135,84 +145,10 @@
   --color-card: var(--card);
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
-
 body {
   @apply bg-black text-sm font-normal text-white;
 
-  font-family: var(--font-poppins);
-}
-
-@layer components {
-  .custom-container {
-    margin: 0 auto;
-    @apply max-w-302 px-6;
-  }
-
-  .purple-shadow {
-    @apply shadow-[0px_4px_24px_0px_rgba(135,70,235,0.32)];
-  }
-
-  .hover-shadow {
-    box-shadow: 0px 4px 24px 0px rgba(135, 70, 235, 1);
-    /* @apply shadow-[0px_4px_32px_4px_rgba(135,70,235,0.8)]; */
-  }
-}
-
-@layer utilities {
-  /* flex utilities */
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-
-  .flex-between {
-    @apply flex items-center justify-between;
-  }
-
-  .flex-start {
-    @apply flex items-center justify-start;
-  }
-
-  .gradient-pink-purple {
-    @apply from-secondary-500 to-primary-500 bg-gradient-to-r;
-  }
-
-  .revert-gradient {
-    @apply to-secondary-500 from-primary-500 bg-gradient-to-r;
-  }
+  font-family: var(--font-inter);
 }
 
 img {
