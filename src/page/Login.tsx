@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +14,8 @@ const loginSchema = z.object({
 
 const Login: React.FC = () => {
   // DEFINE HOOK
+  const [showPassword, setShowPassword] = useState(false);
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -45,13 +47,25 @@ const Login: React.FC = () => {
             <Form.Label className='text-sm font-semibold font-neutral-950'>
               Password
             </Form.Label>
-            <Form.Control asChild>
-              <input
-                type='password'
-                placeholder='Enter your password'
-                className='py-2.5 px-4 border-1 border-neutral-300 rounded-2xl w-full text-sm font-regular font-neutral-500'
+            <div className='border-neutral-300 rounded-2xl border-1 w-full flex-between py-2.5 px-4  '>
+              <Form.Control asChild>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Enter your password'
+                  className='w-full text-sm font-regular font-neutral-500'
+                />
+              </Form.Control>
+              <img
+                src='../../Icons/eye-icon.svg'
+                alt='Show password'
+                className='w-4 h-3 shrink-0 cursor-pointer'
+                onMouseDown={() => setShowPassword(true)}
+                onMouseUp={() => setShowPassword(false)}
+                onMouseLeave={() => setShowPassword(false)}
+                onTouchStart={() => setShowPassword(true)}
+                onTouchEnd={() => setShowPassword(false)}
               />
-            </Form.Control>
+            </div>
           </Form.Field>
 
           <Form.Submit className='w-full'>
