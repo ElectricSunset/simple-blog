@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from 'radix-ui';
 import { Button } from '@/components/ui/button';
+import { authLogin } from '@/services/authentication';
+import { useDispatch } from 'react-redux';
+import { setToken } from '@/state/authSlice';
 
 const loginSchema = z.object({
   email: z
@@ -13,8 +16,8 @@ const loginSchema = z.object({
 });
 
 const Login: React.FC = () => {
-  // DEFINE HOOK
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -23,19 +26,28 @@ const Login: React.FC = () => {
       password: '',
     },
   });
-  // API CALL
+
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    try {
+      const response = await authLogin(data.email, data.password);
+      dispatch(setToken(response.token));
+    } catch (err) {
+      console.error('Login failed:', err);
+    }
+  };
 
   return (
     <div className='flex items-center justify-center h-screen w-screen'>
       <div className='bg-white p-6 border-1 border-neutral-200 rounded-2xl space-y-5 m-12 w-full sm:w-90 '>
         <h1>Sign In</h1>
-        <Form.Root className='space-y-5'>
+        <Form.Root className='space-y-5' onSubmit={form.handleSubmit(onSubmit)}>
           <Form.Field name='email' className='space-y-1 flex flex-col'>
             <Form.Label className='text-sm font-semibold font-neutral-950'>
               Email
             </Form.Label>
             <Form.Control asChild>
               <input
+                {...form.register('email')}
                 placeholder='Enter your email'
                 type='email'
                 className='py-2.5 px-4 border-neutral-300 border-1 rounded-2xl text-sm font-regular font-neutral-500'
@@ -50,6 +62,7 @@ const Login: React.FC = () => {
             <div className='border-neutral-300 rounded-2xl border-1 w-full flex-between py-2.5 px-4  '>
               <Form.Control asChild>
                 <input
+                  {...form.register('password')}
                   type={showPassword ? 'text' : 'password'}
                   placeholder='Enter your password'
                   className='w-full text-sm font-regular font-neutral-500'
@@ -68,7 +81,7 @@ const Login: React.FC = () => {
             </div>
           </Form.Field>
 
-          <Form.Submit className='w-full'>
+          <Form.Submit asChild className='w-full'>
             <Button>Login</Button>
           </Form.Submit>
         </Form.Root>
