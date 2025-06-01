@@ -43,6 +43,7 @@ const Login: React.FC = () => {
       form.reset();
     } catch (err) {
       console.error('Login failed:', err);
+      // give error dialog
     }
   };
 
@@ -83,7 +84,7 @@ const Login: React.FC = () => {
                     Password
                   </FormLabel>
                   <FormControl>
-                    <div className='border-neutral-300 rounded-2xl border-1 w-full flex-between py-2.5 px-4'>
+                    <div className='border-neutral-300 rounded-2xl border-1 w-full flex-between py-2.5 px-4 gap-1'>
                       <Input
                         {...field}
                         placeholder='Enter your password'
@@ -110,7 +111,7 @@ const Login: React.FC = () => {
           </form>
         </Form>
         <p className='text-sm font-regular font-neutral-950'>
-          {"Don't have an account?"}
+          {"Don't have an account? "}
           <a
             href='#'
             className=' font-semibold text-sm font-primary-300 hover:underline'
