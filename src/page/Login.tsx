@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from 'radix-ui';
+import { Button } from '@/components/ui/button';
 
 const loginSchema = z.object({
   email: z
@@ -23,23 +24,51 @@ const Login: React.FC = () => {
   // API CALL
 
   return (
-    <Form.Root>
-      <Form.Field name='email'>
-        <Form.Label>Email</Form.Label>
-        <Form.Control asChild>
-          <input type='email' />
-        </Form.Control>
-      </Form.Field>
+    <div className='flex items-center justify-center h-screen w-screen'>
+      <div className='bg-white p-6 border-1 border-neutral-200 rounded-2xl space-y-5 m-12 w-full sm:w-90 '>
+        <h1>Sign In</h1>
+        <Form.Root className='space-y-5'>
+          <Form.Field name='email' className='space-y-1 flex flex-col'>
+            <Form.Label className='text-sm font-semibold font-neutral-950'>
+              Email
+            </Form.Label>
+            <Form.Control asChild>
+              <input
+                placeholder='Enter your email'
+                type='email'
+                className='py-2.5 px-4 border-neutral-300 border-1 rounded-2xl text-sm font-regular font-neutral-500'
+              />
+            </Form.Control>
+          </Form.Field>
 
-      <Form.Field name='password'>
-        <Form.Label>Password</Form.Label>
-        <Form.Control asChild>
-          <input type='password' />
-        </Form.Control>
-      </Form.Field>
+          <Form.Field name='password' className='space-y-1 flex flex-col'>
+            <Form.Label className='text-sm font-semibold font-neutral-950'>
+              Password
+            </Form.Label>
+            <Form.Control asChild>
+              <input
+                type='password'
+                placeholder='Enter your password'
+                className='py-2.5 px-4 border-1 border-neutral-300 rounded-2xl w-full text-sm font-regular font-neutral-500'
+              />
+            </Form.Control>
+          </Form.Field>
 
-      <Form.Submit />
-    </Form.Root>
+          <Form.Submit className='w-full'>
+            <Button>Login</Button>
+          </Form.Submit>
+        </Form.Root>
+        <p className='text-sm font-regular font-neutral-950'>
+          {"Don't have an account?"}{' '}
+          <a
+            href='#'
+            className=' font-semibold text-sm font-primary-300 hover:underline'
+          >
+            Register
+          </a>
+        </p>
+      </div>
+    </div>
   );
 };
 
