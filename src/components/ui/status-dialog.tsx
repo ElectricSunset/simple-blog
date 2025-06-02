@@ -9,11 +9,15 @@ import {
 import { Button } from './button';
 
 type StatusDialogProps = {
+  title: string;
+  description: string;
   open: boolean;
   onClose: () => void;
 };
 
 const StatusDialog: React.FC<StatusDialogProps> = ({
+  title,
+  description,
   open,
   onClose,
   ...props
@@ -22,10 +26,8 @@ const StatusDialog: React.FC<StatusDialogProps> = ({
     <Dialog {...props} open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Email or Password Wrong!</DialogTitle>
-          <DialogDescription>
-            Please try again with different email or password
-          </DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <Button onClick={onClose}>Back</Button>
       </DialogContent>
