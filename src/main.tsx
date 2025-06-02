@@ -10,7 +10,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <Login />
-      {/* <Test /> */}
     </Provider>
   </StrictMode>
 );

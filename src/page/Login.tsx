@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { authLogin } from '@/services/authentication';
 import { useDispatch } from 'react-redux';
 import { setToken } from '@/state/authSlice';
+import StatusDialog from '@/components/ui/status-dialog';
 
 const loginSchema = z.object({
   email: z
@@ -26,6 +27,7 @@ const loginSchema = z.object({
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showDialog, setShowDialog] = React.useState(false);
   const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -43,7 +45,7 @@ const Login: React.FC = () => {
       form.reset();
     } catch (err) {
       console.error('Login failed:', err);
-      // give error dialog
+      setShowDialog(true);
     }
   };
 
@@ -119,6 +121,12 @@ const Login: React.FC = () => {
             Register
           </a>
         </p>
+        <StatusDialog
+          open={showDialog}
+          onClose={() => {
+            setShowDialog(false);
+          }}
+        ></StatusDialog>
       </div>
     </div>
   );
