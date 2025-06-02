@@ -13,6 +13,7 @@ type StatusDialogProps = {
   description: string;
   open: boolean;
   onClose: () => void;
+  buttonText?: string;
 };
 
 const StatusDialog: React.FC<StatusDialogProps> = ({
@@ -20,6 +21,7 @@ const StatusDialog: React.FC<StatusDialogProps> = ({
   description,
   open,
   onClose,
+  buttonText = 'Back',
   ...props
 }) => {
   return (
@@ -29,7 +31,7 @@ const StatusDialog: React.FC<StatusDialogProps> = ({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <Button onClick={onClose}>Back</Button>
+        <Button onClick={onClose}>{buttonText}</Button>
       </DialogContent>
     </Dialog>
   );

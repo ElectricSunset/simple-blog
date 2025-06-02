@@ -12,11 +12,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { authLogin } from '@/services/authentication';
-import { useDispatch } from 'react-redux';
-import { setToken } from '@/state/authSlice';
+import { authRegister } from '@/services/authentication';
 import StatusDialog from '@/components/ui/status-dialog';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setId } from '@/state/authSlice';
 
 const registerSchema = z
   .object({
@@ -42,6 +42,7 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showDialog, setShowDialog] = React.useState(false);
+  const [showSuccessDialog, setShowSuccesssDialog] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,10 +58,9 @@ const Register: React.FC = () => {
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     try {
-      const response = await authLogin(data.email, data.password);
-      dispatch(setToken(response.token));
-      form.reset();
-      navigate('/');
+      const response = await authRegister(data.name, data.email, data.password);
+      dispatch(setId(response.id));
+      setShowSuccesssDialog(true);
     } catch (err) {
       console.error('Register failed:', err);
       setShowDialog(true);
@@ -201,6 +201,16 @@ const Register: React.FC = () => {
           onClose={() => {
             setShowDialog(false);
           }}
+        ></StatusDialog>
+
+        <StatusDialog
+          title={'Your Account Sucessfully Created'}
+          description='Login with my account'
+          open={showSuccessDialog}
+          onClose={() => {
+            navigate('/login');
+          }}
+          buttonText='Go to Login'
         ></StatusDialog>
       </div>
     </div>
