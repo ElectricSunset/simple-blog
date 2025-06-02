@@ -1,7 +1,8 @@
 import React from 'react';
+import Navigation from '@/components/ui/navbar';
 
 const Home: React.FC = () => {
-  return <div className='bg-red-600 text-display-3xl'>This is Home</div>;
+  return <Navigation />;
 };
 
 export default Home;

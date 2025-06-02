@@ -247,6 +247,12 @@ img {
   .font-primary-300 {
     color: var(--color-primary-300);
   }
+  .font-primary-200 {
+    color: var(--color-primary-200);
+  }
+  .font-primary-100 {
+    color: var(--color-primary-100);
+  }
 }
 
 @layer utilities {
