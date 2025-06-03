@@ -26,7 +26,10 @@ const Navigation: React.FC = () => {
       <nav className='flex-between py-5 md:py-4'>
         <img
           src='../../Icons/logo-symbol.svg'
-          className='w-26.5 h-6 md:w-40 md:h-9'
+          className='w-26.5 h-6 md:w-40 md:h-9 cursor-pointer'
+          onClick={() => {
+            navigate('/');
+          }}
         />
         <div className='py-3 px-4 justify-start border-1 border-neutral-300 rounded-xl gap-2 w-93.25 hidden md:flex ml-5 mr-5'>
           <img
@@ -94,6 +97,5 @@ const Navigation: React.FC = () => {
     </div>
   );
 };
-// Bikin Responsive untuk mobile
 // Bikin Logicnya
 export default Navigation;
