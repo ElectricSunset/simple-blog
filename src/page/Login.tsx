@@ -16,7 +16,9 @@ import { Button } from '@/components/ui/button';
 import { authLogin } from '@/services/authentication';
 import { useDispatch } from 'react-redux';
 import { setToken } from '@/state/authSlice';
+import { setUserInfo } from '@/state/userSlice';
 import StatusDialog from '@/components/ui/status-dialog';
+import { getUserInfo } from '@/services/users';
 
 const loginSchema = z.object({
   email: z
@@ -28,7 +30,7 @@ const loginSchema = z.object({
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showDialog, setShowDialog] = React.useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,6 +46,8 @@ const Login: React.FC = () => {
     try {
       const response = await authLogin(data.email, data.password);
       dispatch(setToken(response.token));
+      const userInfo = await getUserInfo(data.email);
+      dispatch(setUserInfo(userInfo));
       form.reset();
       navigate('/');
     } catch (err) {
