@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { useMedia } from 'react-use';
 import { store } from '@/state/store';
+import { logOut } from '@/services/logOut';
 import {
   Sheet,
   SheetContent,
@@ -102,7 +103,10 @@ const Navigation: React.FC = () => {
                     />
                     Profile
                   </MenubarItem>
-                  <MenubarItem>
+                  <MenubarItem
+                    onClick={() => logOut()}
+                    className='cursor-pointer space-x-2.625'
+                  >
                     <img
                       src='../../Icons/log-out-icon.svg'
                       className='h-3.75 w-4.25 shrink-0'
