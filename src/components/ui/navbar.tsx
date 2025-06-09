@@ -2,13 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
+import { useMedia } from 'react-use';
 import { store } from '@/state/store';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from '@/components/ui/menubar';
 
 const Navigation: React.FC = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState(
+    '../../Images/john-doe-avatar.png'
+  );
+  const isLargeish = useMedia('(min-width: 768px)', false);
+  const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (isLargeish) {
+      setOpen(false);
+    }
+  }, [isLargeish]);
+
+  // Check Login or Not
   useEffect(() => {
     const userID = store.getState().user.id;
     const savedAvatarUrl = store.getState().user.avatUrl;
@@ -41,6 +69,7 @@ const Navigation: React.FC = () => {
             className='hidden min-w-20 md:block w-full'
           />
         </div>
+
         {loggedIn ? (
           <div className='flex-center gap-6'>
             <Button
@@ -51,17 +80,38 @@ const Navigation: React.FC = () => {
               Write Post
             </Button>
             <div className='h-6 border-1 border-neutral-300 hidden md:block' />
-            <Button
-              variant={'ghost'}
-              className='hidden md:flex-center md:gap-3'
-              onClick={() => navigate('/login')}
-            >
-              <img
-                src={avatarUrl}
-                className='w-10 h-10 rounded-full border shrink-0'
-              />
-              <p className='hidden md:block'>{store.getState().user.name}</p>
-            </Button>
+            <Menubar>
+              <MenubarMenu>
+                <MenubarTrigger>
+                  <img
+                    src={avatarUrl}
+                    className='w-10 h-10 rounded-full border shrink-0 cursor-pointer'
+                  />
+                  <p className='hidden md:block text-sm text-neutral-900 no-underline text-nowrap cursor-pointer'>
+                    {store.getState().user.name}
+                  </p>
+                </MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem
+                    onClick={() => navigate('/profile')}
+                    className='cursor-pointer space-x-2.625'
+                  >
+                    <img
+                      src='../../Icons/user-icon.svg'
+                      className='w-3.75 h-3.5 shrink-0'
+                    />
+                    Profile
+                  </MenubarItem>
+                  <MenubarItem>
+                    <img
+                      src='../../Icons/log-out-icon.svg'
+                      className='h-3.75 w-4.25 shrink-0'
+                    />
+                    Logout
+                  </MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
           </div>
         ) : (
           <>
@@ -86,10 +136,43 @@ const Navigation: React.FC = () => {
                 src='../../Icons/magnifier.svg'
                 className='w-4.5 h-4.5 block md:hidden cursor-pointer'
               />
-              <img
-                src='../../Icons/menu-icon.svg'
-                className='w-4.5 h-4.5 block md:hidden cursor-pointer'
-              />
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger>
+                  <img
+                    src='../../Icons/menu-icon.svg'
+                    className='w-4.5 h-4.5 block md:hidden cursor-pointer'
+                  />
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle className='border-b border-neutral-300 py-5 px-4 '>
+                      {' '}
+                      <img
+                        src='../../Icons/logo-symbol.svg'
+                        className='w-25 h-6 cursor-pointer '
+                        onClick={() => {
+                          navigate('/');
+                        }}
+                      />
+                    </SheetTitle>
+                    <SheetDescription className='flex-center flex-col gap-4 pt-10'>
+                      <Button
+                        variant={'ghost'}
+                        className='w-53.5 h-11'
+                        onClick={() => navigate('/login')}
+                      >
+                        Login
+                      </Button>
+                      <Button
+                        className='w-53.5 h-11'
+                        onClick={() => navigate('/register')}
+                      >
+                        Register
+                      </Button>
+                    </SheetDescription>
+                  </SheetHeader>
+                </SheetContent>
+              </Sheet>
             </div>
           </>
         )}
@@ -97,5 +180,4 @@ const Navigation: React.FC = () => {
     </div>
   );
 };
-// Bikin Logicnya
 export default Navigation;
