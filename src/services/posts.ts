@@ -1,10 +1,17 @@
 import { api } from './api';
 
-export const getRecommendedPost = async (
-  limits: number = 5,
-  page: number = 1
-) => {
-  const response = await api.get('/posts/recommended', {
+interface GetPostInput {
+  limits?: string;
+  page?: string;
+  type: 'recommended' | 'most-liked';
+}
+
+export const getPosts = async ({
+  limits = '5',
+  page = '1',
+  type,
+}: GetPostInput) => {
+  const response = await api.get(`/posts/${type}`, {
     params: {
       limits,
       page,

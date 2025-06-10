@@ -60,7 +60,7 @@ const Navigation: React.FC = () => {
             navigate('/');
           }}
         />
-        <div className='py-3 px-4 justify-start border-1 border-neutral-300 rounded-xl gap-2 w-93.25 hidden md:flex ml-5 mr-5'>
+        <div className='py-3 px-4 justify-start border-1 border-neutral-300 rounded-xl gap-2 w-93.25 hidden md:flex ml-auto mr-5 '>
           <img
             src='../../Icons/magnifier.svg'
             className='w-6 h-6 hidden md:block'
@@ -119,7 +119,7 @@ const Navigation: React.FC = () => {
           </div>
         ) : (
           <>
-            <div className='flex-center gap-6'>
+            <div className='flex-center gap-6 ml-auto'>
               <Button
                 variant={'ghost'}
                 className='hidden md:block'
